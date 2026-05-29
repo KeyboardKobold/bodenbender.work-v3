@@ -520,16 +520,20 @@ body {
 .contact-item:hover .contact-value { color: var(--text); }
 
 .cta-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   padding: 0.7rem 1.4rem;
+  min-height: 48px;
   background: transparent;
   color: var(--red);
   border: 1px solid var(--red);
   text-decoration: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
@@ -592,4 +596,6 @@ body {
   .meta-row { grid-template-columns: 100px 1fr; font-size: 0.73rem; }
 
   .resolution-steps li::before { min-width: 44px; }
+
+  .cta-button { display: flex; width: 100%; }
 }
