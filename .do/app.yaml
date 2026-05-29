@@ -6,7 +6,7 @@ static_sites:
   github:
     branch: main
     deploy_on_push: true
-    repo: REPLACE_WITH_YOUR_GITHUB_USERNAME/bodenbender.work-v3
+    repo: KeyboardKobold/bodenbender.work-v3
   environment_slug: node-js
   build_command: npm run build
   output_dir: dist
