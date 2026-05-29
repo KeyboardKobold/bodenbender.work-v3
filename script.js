@@ -8,6 +8,9 @@ const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 8640000
 document.getElementById('ticket-id').textContent =
   `CB-${now.getFullYear()}-${String(dayOfYear).padStart(3, '0')}`;
 
+// ─── Feature flags ─────────────────────────────────────────────────────────
+const ENGLISH_CV_READY = false; // flip to true once Bodenbender_CV.pdf is in public/
+
 // ─── State ─────────────────────────────────────────────────────────────────
 const choices = { concern: null, subconcern: null, context: null };
 
@@ -37,14 +40,18 @@ function updateHeader(stepId) {
 }
 
 // ─── Step transition ───────────────────────────────────────────────────────
+let transitioning = false;
+
 function goToStep(nextId) {
+  if (transitioning) return;
+  transitioning = true;
+
   const current = document.querySelector('.step.is-active');
   const next    = document.getElementById(nextId);
 
   if (nextId === 'step-3') populateStep3();
   if (nextId === 'step-5') populateStep5();
 
-  // Exit current step
   current.classList.remove('is-active');
   current.classList.add('is-exiting');
 
@@ -53,7 +60,10 @@ function goToStep(nextId) {
     next.classList.add('is-active', 'is-entering');
     window.scrollTo({ top: 0, behavior: 'instant' });
     updateHeader(nextId);
-    setTimeout(() => next.classList.remove('is-entering'), 380);
+    setTimeout(() => {
+      next.classList.remove('is-entering');
+      transitioning = false;
+    }, 380);
   }, 260);
 }
 
@@ -93,10 +103,10 @@ const STEP3_DATA = {
   },
   security: {
     label:  '03 — QUALIFYING FACTORS — RESILIENCE & SECURITY',
-    intro:  'The following systems confirm the engineer\'s qualifications for security-conscious, resilient infrastructure — relevant to both incident recovery and cloud-native hardening.',
+    intro:  'The following systems confirm the engineer\'s qualifications for security-conscious, resilient infrastructure. Relevant to both incident recovery and cloud-native hardening.',
     items: [
       { name: 'Docker, Kubernetes',
-        detail: 'Early adopter before enterprise adoption. Understands the isolation model — not just the deployment workflow.' },
+        detail: 'Early adopter before enterprise adoption. Understands the isolation model, not just the deployment workflow.' },
       { name: 'Vert.x',
         detail: 'Real-time reactive systems. Rebuilt with data integrity checks baked into the architecture.' },
       { name: 'Security: CVE management · pentesting · SLI/SLA · SQL injection hardening',
@@ -129,9 +139,9 @@ function populateStep3() {
         </li>
       `).join('')}
     </ul>
-    <p class="step-aside">He has shipped in chaos and in structure — startups without process and R&amp;D teams where nothing moved without documentation. He is equally comfortable establishing order where there is none and following it where it exists. He also has a dog. <span class="dog">🐕</span></p>
+    <p class="step-aside">He has shipped in both: startups where processes were invented as needed, and international R&amp;D teams where nothing moved without documentation. Equally comfortable establishing order where there is none and following it where it exists. He also has a dog. <span class="dog">🐕</span></p>
     ${d.subchoices ? `
-      <p class="step-prompt" style="margin-top:1.75rem">${d.subchoicePrompt}</p>
+      <p class="step-prompt">${d.subchoicePrompt}</p>
       <div class="choice-list">
         ${d.subchoices.map(c => `
           <button class="choice-item" data-choice="subconcern" data-value="${c.value}" data-next="step-4">
@@ -176,14 +186,14 @@ const STEP5_DATA = {
   },
   'security-ransomware-structured': {
     label:      '05 — PROPOSED RESOLUTION',
-    assessment: 'Christian has operated in international R&D environments where security was part of the process — not a post-incident concern. He tracked CVEs proactively, hardened against injection vectors at the application layer, and built infrastructure designed to surface failures before they become incidents. He knows how to rebuild with documentation. He is available for a full-time role immediately.',
+    assessment: 'Christian has operated in international R&D environments where security was built into the process, not addressed after something broke. He tracked CVEs proactively, hardened against injection vectors at the application layer, and built infrastructure designed to surface failures before they become incidents. He knows how to rebuild with documentation. He is available for a full-time role immediately.',
     steps:      ['Contact Christian Bodenbender', 'Discuss recovery plan, timeline, and structural hardening', 'Begin with the right person in the seat'],
     cta:        { text: '[ BRING HIM IN ]', mod: 'cta-button--amber' },
     postmortem: 'At some point, someone should understand how this got in, what it touched, and what structural change prevents it from happening the same way again. This is not always the moment for that conversation. When it is, the offer is open. The companies that run that postmortem don\'t get hit the same way twice.',
   },
   'security-cloudnative-fast': {
     label:      '05 — PROPOSED RESOLUTION',
-    assessment: 'Christian adopted Docker and Kubernetes before most enterprises knew the names — which means he understands the isolation model, not just the tooling. He has built cloud-native data pipelines handling 3 billion IoT messages per day across S3 and Azure Data Lake. In a fast-moving environment, he moves quickly without leaving security as an afterthought. He is available for a full-time role immediately.',
+    assessment: 'Christian adopted Docker and Kubernetes before most enterprises knew the names. He understands the isolation model, not just the tooling. He has built cloud-native data pipelines handling 3 billion IoT messages per day across S3 and Azure Data Lake. In a fast-moving environment, he moves quickly without leaving security as an afterthought. He is available for a full-time role immediately.',
     steps:      ['Contact Christian Bodenbender', 'Discuss cloud architecture and what needs to be hardened', 'Close the incident'],
     cta:        { text: '[ BRING HIM IN ]', mod: 'cta-button--amber' },
     postmortem: null,
@@ -227,6 +237,23 @@ function populateStep5() {
       <a href="https://bodenbender.work" class="contact-item">
         <span class="contact-label">Web</span>
         <span class="contact-value">bodenbender.work</span>
+      </a>
+    </div>
+    <div class="attachments-section">
+      <span class="attachments-label">Attachments</span>
+      <!-- EN: set ENGLISH_CV_READY = true once the English CV is ready -->
+      ${ENGLISH_CV_READY ? `
+      <a href="/Bodenbender_CV.pdf" download class="attachment-item">
+        <span class="attachment-type">PDF</span>
+        <span class="attachment-name">Bodenbender_CV.pdf</span>
+        <span class="attachment-lang">EN</span>
+        <span class="attachment-dl">↓</span>
+      </a>` : ''}
+      <a href="/Bodenbender_Lebenslauf.pdf" download class="attachment-item">
+        <span class="attachment-type">PDF</span>
+        <span class="attachment-name">Bodenbender_Lebenslauf.pdf</span>
+        <span class="attachment-lang">DE</span>
+        <span class="attachment-dl">↓</span>
       </a>
     </div>
     <a href="mailto:bodenbender@protonmail.com" class="cta-button ${d.cta.mod}">${d.cta.text}</a>
