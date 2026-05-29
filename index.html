@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CB-2025-001 — P1: Missing Backend Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="draft-banner">// DRAFT — this report is under active construction and not yet deployed</div>
+
+  <div class="report">
+
+    <header class="report-header">
+      <div class="report-system-label">INCIDENT REPORT</div>
+      <div class="report-meta">
+        <div class="meta-row">
+          <span class="meta-label">Severity</span>
+          <span class="meta-value">
+            <span class="severity-badge" id="severity-badge">P1 — CRITICAL</span>
+          </span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Status</span>
+          <span class="meta-value status-open" id="header-status">OPEN</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Ticket ID</span>
+          <span class="meta-value" id="ticket-id">—</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Reported</span>
+          <span class="meta-value" id="report-date">—</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Assigned to</span>
+          <span class="meta-value unassigned" id="header-assigned">[UNASSIGNED]</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="report-stage">
+
+      <!-- Step 1: always static -->
+      <div class="step is-active" id="step-1">
+        <h2 class="section-label">01 — INCIDENT SUMMARY</h2>
+        <p class="step-body">A senior backend engineer capable of processing 3 billion IoT messages per day, enforcing SLAs under real production load, and patching CVEs before they make the news — is currently unassigned. Your data pipeline noticed.</p>
+        <div class="step-actions">
+          <button class="action-btn" data-next="step-2">[ OPEN INVESTIGATION ]</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Choice 1 — concern -->
+      <div class="step" id="step-2">
+        <h2 class="section-label">02 — TRIAGE</h2>
+        <p class="step-prompt">What does your team need most right now?</p>
+        <div class="choice-list">
+          <button class="choice-item" data-choice="concern" data-value="scale" data-next="step-3">
+            <span class="choice-arrow">▸</span>
+            <div class="choice-body">
+              <span class="choice-title">SCALE &amp; VELOCITY</span>
+              <span class="choice-sub">We need to ship more, faster, at higher reliability</span>
+            </div>
+          </button>
+          <button class="choice-item" data-choice="concern" data-value="security" data-next="step-3">
+            <span class="choice-arrow">▸</span>
+            <div class="choice-body">
+              <span class="choice-title">RESILIENCE &amp; SECURITY</span>
+              <span class="choice-sub">We've had incidents. We need infrastructure that doesn't break the same way twice</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Qualifying factors — populated by JS based on choice 1 -->
+      <div class="step" id="step-3"></div>
+
+      <!-- Step 4: Choice 2 — context -->
+      <div class="step" id="step-4">
+        <h2 class="section-label">04 — ENVIRONMENT ASSESSMENT</h2>
+        <p class="step-prompt">What describes your team's current state?</p>
+        <div class="choice-list">
+          <button class="choice-item" data-choice="context" data-value="fast" data-next="step-5">
+            <span class="choice-arrow">▸</span>
+            <div class="choice-body">
+              <span class="choice-title">WE MOVE FAST, STRUCTURE FOLLOWS</span>
+              <span class="choice-sub">High velocity, evolving processes, building as we go</span>
+            </div>
+          </button>
+          <button class="choice-item" data-choice="context" data-value="structured" data-next="step-5">
+            <span class="choice-arrow">▸</span>
+            <div class="choice-body">
+              <span class="choice-title">ESTABLISHED TEAM, DEFINED PROCESSES</span>
+              <span class="choice-sub">Clear standards, documentation, deliberate engineering culture</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 5: Resolution — populated by JS based on both choices -->
+      <div class="step" id="step-5"></div>
+
+    </main>
+
+  </div>
+
+  <footer class="site-footer">
+    <p>Christian Bodenbender &middot; Marburg, Germany &middot; <a href="mailto:bodenbender@protonmail.com">bodenbender@protonmail.com</a></p>
+    <p>Full-time &middot; Hybrid or Remote &middot; Java &middot; Kotlin &middot; Python &middot; Go</p>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
